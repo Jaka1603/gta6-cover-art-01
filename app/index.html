@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PALM HEAT Cover Studio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23150a21'/%3E%3Cpath d='M50 10 L62 39 L93 39 L68 58 L77 89 L50 70 L23 89 L32 58 L7 39 L38 39 Z' fill='%23f2b63c'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="studio">
+  <aside class="panel">
+    <header class="brand">
+      <h1>PALM HEAT</h1>
+      <p>Cover Studio — your photos, one neon-sunset poster.</p>
+    </header>
+
+    <section>
+      <h2>1 · Photos</h2>
+      <div id="photoStrip" class="strip" aria-label="Photos"></div>
+      <label class="upload-button">Add your photos
+        <input id="upload" type="file" accept="image/*" multiple hidden>
+      </label>
+      <button id="fillAll" type="button">Fill every panel with the picked photo</button>
+      <p id="status" class="status" role="status"></p>
+    </section>
+
+    <section>
+      <h2>2 · Panel &amp; crop</h2>
+      <div id="panelChips" class="chips" aria-label="Panels"></div>
+      <label class="field">Cast tag <input id="tagInput" type="text" maxlength="24"></label>
+      <label class="slider">Zoom <input id="zoom" type="range" min="1" max="4" step="0.01"><span id="zoomVal"></span></label>
+      <label class="slider">Across <input id="cropX" type="range" min="-1" max="1" step="0.01"><span id="cropXVal"></span></label>
+      <label class="slider">Down <input id="cropY" type="range" min="-1" max="1" step="0.01"><span id="cropYVal"></span></label>
+      <button id="resetCrop" type="button">Reset this panel's crop</button>
+    </section>
+
+    <section>
+      <h2>3 · Layout, grade &amp; size</h2>
+      <div id="layoutChips" class="chips" aria-label="Layouts"></div>
+      <div id="gradeChips" class="chips" aria-label="Grades"></div>
+      <div id="sizeChips" class="chips" aria-label="Preview size"></div>
+    </section>
+
+    <section>
+      <h2>4 · Words &amp; furniture</h2>
+      <label class="field">Title <input id="titleInput" type="text" maxlength="26"></label>
+      <label class="field">Script subtitle <input id="subtitleInput" type="text" maxlength="34"></label>
+      <label class="field">Tagline <input id="taglineInput" type="text" maxlength="60"></label>
+      <label class="field">Press quote <input id="quoteInput" type="text" maxlength="80"></label>
+      <label class="slider">Heat <input id="heat" type="range" min="0" max="5" step="1"><span id="heatVal"></span></label>
+      <div class="toggles">
+        <label><input id="showMasthead" type="checkbox"> Masthead</label>
+        <label><input id="showSeal" type="checkbox"> Gold seal</label>
+        <label><input id="showBilling" type="checkbox"> Billing block</label>
+        <label><input id="showGrain" type="checkbox"> Print grain</label>
+      </div>
+    </section>
+
+    <section>
+      <h2>5 · Export</h2>
+      <div class="row">
+        <button id="undo" type="button">Undo</button>
+        <button id="redo" type="button">Redo</button>
+      </div>
+      <div class="exports">
+        <button type="button" data-export="1080x1080">PNG 1080 × 1080</button>
+        <button type="button" data-export="1080x1350">PNG 1080 × 1350</button>
+        <button type="button" data-export="1920x1080">PNG 1920 × 1080</button>
+        <button type="button" data-export="1080x1920">PNG 1080 × 1920 story</button>
+      </div>
+      <p class="keys">Shortcuts: Ctrl/Cmd+Z undo · Ctrl/Cmd+Shift+Z or Ctrl+Y redo · arrow keys nudge the picked panel's crop (Shift = bigger).</p>
+    </section>
+  </aside>
+
+  <main class="stage">
+    <canvas id="cover" aria-label="Your cover, live preview"></canvas>
+    <p class="hint">Click a panel to pick it · drag its photo to move the crop · scroll over a panel to zoom it</p>
+  </main>
+</div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

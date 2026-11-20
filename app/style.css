@@ -1,0 +1,129 @@
+/* PALM HEAT Cover Studio — a dark studio around a bright cover.
+   Plum panels, gold rules, neon-pink accents; the cover canvas is the
+   only loud thing on the page. Fonts are local files, nothing loads
+   from the network. */
+
+@font-face {
+  font-family: 'Anton';
+  src: url('./fonts/Anton-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pacifico';
+  src: url('./fonts/Pacifico-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background: #0d0616;
+  color: #f3e9d2;
+  font: 14px/1.45 system-ui, 'Segoe UI', sans-serif;
+}
+
+.studio { display: flex; min-height: 100vh; }
+
+.panel {
+  width: 322px;
+  flex: 0 0 322px;
+  padding: 18px 18px 26px;
+  background: linear-gradient(180deg, #1c0d2e, #14081f);
+  border-right: 2px solid rgba(242, 182, 60, 0.35);
+  overflow-y: auto;
+  max-height: 100vh;
+}
+.brand h1 {
+  margin: 0;
+  font-family: 'Anton', sans-serif;
+  font-size: 34px;
+  letter-spacing: 1px;
+  background: linear-gradient(180deg, #fff6ad 20%, #ffd23e 45%, #ff9a3d 65%, #e83e8c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.brand p { margin: 2px 0 6px; color: #c9b48a; font-size: 12.5px; }
+
+.panel section { border-top: 1px solid rgba(242, 182, 60, 0.22); padding: 12px 0 14px; }
+.panel h2 {
+  margin: 0 0 9px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1.6px;
+  color: #f2b63c;
+  text-transform: uppercase;
+}
+
+.strip { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 9px; }
+.strip button {
+  padding: 0; border: 2px solid transparent; border-radius: 6px;
+  background: none; cursor: pointer; line-height: 0;
+}
+.strip button img { width: 44px; height: 44px; object-fit: cover; border-radius: 4px; }
+.strip button.picked { border-color: #ff5da2; }
+.strip button.in-slot { box-shadow: 0 0 0 2px rgba(242, 182, 60, 0.65); }
+
+button, .upload-button {
+  font: inherit; font-weight: 600;
+  background: #2a1544; color: #f3e9d2;
+  border: 1px solid rgba(242, 182, 60, 0.45); border-radius: 6px;
+  padding: 7px 10px; cursor: pointer; display: inline-block;
+}
+button:hover, .upload-button:hover { background: #3a1c5e; }
+button:disabled { opacity: 0.4; cursor: default; }
+.upload-button { margin-right: 6px; }
+.status { min-height: 18px; margin: 8px 0 0; color: #ffb3cd; font-size: 12.5px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 9px; }
+.chips button {
+  font-size: 12px; font-weight: 600; padding: 5px 9px; border-radius: 20px;
+  background: #221136; border: 1px solid rgba(243, 233, 210, 0.25);
+}
+.chips button.on {
+  background: #f2b63c; color: #241300; border-color: #f2b63c;
+}
+
+.field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; font-weight: 600; font-size: 12.5px; color: #d8c69a; }
+.field input[type='text'] {
+  font: inherit; font-weight: 400; padding: 7px 9px;
+  background: #0f0720; color: #fff; border: 1px solid rgba(243, 233, 210, 0.3); border-radius: 6px;
+}
+.slider { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; font-weight: 600; font-size: 12.5px; color: #d8c69a; }
+.slider input[type='range'] { flex: 1; accent-color: #ff5da2; }
+.slider span { width: 34px; text-align: right; color: #fff; font-weight: 400; }
+
+.toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 10px; margin-top: 4px; }
+.toggles label { display: flex; gap: 6px; align-items: center; font-size: 12.5px; cursor: pointer; }
+.toggles input { accent-color: #f2b63c; }
+
+.row { display: flex; gap: 6px; margin-bottom: 9px; }
+.row button { flex: 1; }
+.exports { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.exports button { background: #571b63; border-color: rgba(255, 93, 162, 0.55); }
+.exports button:hover { background: #72257f; }
+.keys { color: #9d8bab; font-size: 11.5px; margin: 9px 0 0; }
+
+.stage {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; padding: 22px; min-width: 0;
+  background: radial-gradient(1100px 600px at 50% 30%, #241038, #0d0616);
+}
+.stage canvas {
+  max-width: 100%; max-height: calc(100vh - 90px);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.65);
+  cursor: grab; touch-action: none;
+}
+.stage canvas:active { cursor: grabbing; }
+.hint { margin: 0; color: #9d8bab; font-size: 12.5px; }
+
+/* Screenshot mode: the cover alone, filling the window. */
+body.shot-cover .panel, body.shot-cover .hint { display: none; }
+body.shot-cover .stage { padding: 0; }
+body.shot-cover .stage canvas { width: 100vw; height: 100vh; max-height: none; box-shadow: none; cursor: default; }
+
+@media (max-width: 760px) {
+  .studio { flex-direction: column; }
+  .panel { width: auto; flex: none; max-height: none; border-right: 0; border-bottom: 2px solid rgba(242, 182, 60, 0.35); }
+}
